@@ -1,0 +1,44 @@
+def water_jug_problem(capacity_a, capacity_b, capacity_c, target):
+    jug_a = 0
+    jug_b = 0
+    jug_c = 0
+
+    while jug_a != target and jug_b != target and jug_c != target:
+        print(f"\nJug A: {jug_a} liters | Jug B: {jug_b} liters | Jug C: {jug_c} liters")
+
+        # Choose the action automatically based on the remaining capacity
+        if jug_a == 0:
+            jug_a = capacity_a
+        elif jug_b == capacity_b:
+            jug_b = 0
+        elif jug_c == capacity_c:
+            jug_c = 0
+        else:
+            # Pour water between jugs
+            # You can customize this part based on your pouring strategy
+            # For simplicity, let's pour from Jug A to B, then from B to C, and finally from C to A
+            amount_to_pour = min(jug_a, capacity_b - jug_b)
+            jug_a -= amount_to_pour
+            jug_b += amount_to_pour
+
+            amount_to_pour = min(jug_b, capacity_c - jug_c)
+            jug_b -= amount_to_pour
+            jug_c += amount_to_pour
+
+            amount_to_pour = min(jug_c, capacity_a - jug_a)
+            jug_c -= amount_to_pour
+            jug_a += amount_to_pour
+
+    print("\nFinal state:")
+    print(f"Jug A: {jug_a} liters | Jug B: {jug_b} liters | Jug C: {jug_c} liters")
+
+
+if __name__ == "__main__":
+    print("Water Jug Problem Solver")
+
+    capacity_a = int(input("Enter capacity of Jug A: "))
+    capacity_b = int(input("Enter capacity of Jug B: "))
+    capacity_c = int(input("Enter capacity of Jug C: "))
+    target = int(input("Enter the target amount of water: "))
+
+    water_jug_problem(capacity_a, capacity_b, capacity_c, target)
