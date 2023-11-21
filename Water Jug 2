@@ -1,0 +1,30 @@
+def water_jug_problem(capacity_a, capacity_b, target):
+    jug_a = 0
+    jug_b = 0
+
+    while jug_a != target and jug_b != target:
+        print(f"\nJug A: {jug_a} liters | Jug B: {jug_b} liters")
+
+        # Choose the action automatically based on the remaining capacity
+        if jug_a == 0:
+            jug_a = capacity_a
+        elif jug_b == capacity_b:
+            jug_b = 0
+        else:
+            # Pour water from Jug A to B
+            amount_to_pour = min(jug_a, capacity_b - jug_b)
+            jug_a -= amount_to_pour
+            jug_b += amount_to_pour
+
+    print("\nFinal state:")
+    print(f"Jug A: {jug_a} liters | Jug B: {jug_b} liters")
+
+
+if __name__ == "__main__":
+    print("Water Jug Problem Solver")
+
+    capacity_a = int(input("Enter capacity of Jug A: "))
+    capacity_b = int(input("Enter capacity of Jug B: "))
+    target = int(input("Enter the target amount of water: "))
+
+    water_jug_problem(capacity_a, capacity_b, target)
